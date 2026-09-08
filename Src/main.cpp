@@ -167,7 +167,7 @@ int main(void) {
     /* USER CODE BEGIN 2 */
     arduino_serial_init(&huart2);
     arduino_spi_init(&hspi1);
-    arduino_tim_init(&htim1);
+    arduino_tim_init(&htim1, TIM_CHANNEL_1, TIM_CHANNEL_2, TIM_CHANNEL_3);
     arduino_hi2c_init(&hi2c1);
     /* USER CODE END 2 */
 
