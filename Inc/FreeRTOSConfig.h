@@ -57,9 +57,6 @@ extern uint32_t SystemCoreClock;
 }
 #endif
 #endif
-#ifndef CMSIS_device_header
-#define CMSIS_device_header "stm32h5xx.h"
-#endif /* CMSIS_device_header */
 
 #define configENABLE_FPU 0
 #define configENABLE_MPU 0
