@@ -33,7 +33,7 @@ enable_language(C ASM)
 add_subdirectory(ArduinoCore-avr/ArduinoCore-avr-1.8.7)
 add_subdirectory(Arduino-FOC/Arduino-FOC-2.2)
 add_subdirectory(TinyUSB/tinyusb-0.21.0)
-add_subdirectory(HID_FFB/HID_FFB_0.0.1)
+add_subdirectory(HID-FFB/HID-FFB-0.1)
 
 add_library(freertos_headers INTERFACE)
 target_include_directories(freertos_headers INTERFACE
@@ -100,5 +100,9 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 
     # Add user defined libraries
     freertos_kernel
+    arduino_core
+    arduino_foc
+    freertos_kernel
+    tinyusb
     hid_ffb
 )
