@@ -99,7 +99,6 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
 
     # Add user defined libraries
-    freertos_kernel
     arduino_core
     arduino_foc
     freertos_kernel

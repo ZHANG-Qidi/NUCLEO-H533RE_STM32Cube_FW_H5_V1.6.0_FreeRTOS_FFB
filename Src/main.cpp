@@ -125,6 +125,10 @@ void ffb_task(__unused void *params) {
         vTaskDelayUntil(&last, pdMS_TO_TICKS(USB_POLLING_INTERVAL));
     }
 }
+// STM32H5 errata: reading UID_BASE with ICACHE enabled causes hard fault.
+// Cache the unique ID early in board_init() before ICACHE may be enabled.
+static uint32_t cached_uid[3];
+void cached_uid_get(uint32_t *stm32_uuid) { stm32_uuid = cached_uid; }
 /* USER CODE END 0 */
 
 /**
@@ -133,7 +137,11 @@ void ffb_task(__unused void *params) {
  */
 int main(void) {
     /* USER CODE BEGIN 1 */
-
+    // Cache UID before ICACHE is enabled (STM32H5 errata: reading UID_BASE with ICACHE causes hard fault)
+    volatile uint32_t *stm32_uuid = (volatile uint32_t *)UID_BASE;
+    cached_uid[0] = stm32_uuid[0];
+    cached_uid[1] = stm32_uuid[1];
+    cached_uid[2] = stm32_uuid[2];
     /* USER CODE END 1 */
 
     /* MCU Configuration--------------------------------------------------------*/
