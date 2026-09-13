@@ -21,6 +21,8 @@ void arduino_spi_init(SPI_HandleTypeDef *hspi);
 void arduino_tim_init(TIM_HandleTypeDef *htim, uint64_t TIM_CHANNEL_U, uint64_t TIM_CHANNEL_V, uint64_t TIM_CHANNEL_W);
 void arduino_hi2c_init(I2C_HandleTypeDef *hi2c);
 
+#define SPI_MASTER_CS_IO (PIN("C", 9))
+
 #ifdef __cplusplus
 }
 #endif
