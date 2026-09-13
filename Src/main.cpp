@@ -128,7 +128,15 @@ void ffb_task(__unused void *params) {
 // STM32H5 errata: reading UID_BASE with ICACHE enabled causes hard fault.
 // Cache the unique ID early in board_init() before ICACHE may be enabled.
 static uint32_t cached_uid[3];
-void cached_uid_get(uint32_t *stm32_uuid) { stm32_uuid = cached_uid; }
+extern "C" size_t board_get_unique_id(uint8_t id[], size_t max_len) {
+    (void)max_len;
+    uint32_t *id32 = (uint32_t *)(uintptr_t)id;
+    uint8_t const len = 12;
+    id32[0] = cached_uid[0];
+    id32[1] = cached_uid[1];
+    id32[2] = cached_uid[2];
+    return len;
+}
 /* USER CODE END 0 */
 
 /**
