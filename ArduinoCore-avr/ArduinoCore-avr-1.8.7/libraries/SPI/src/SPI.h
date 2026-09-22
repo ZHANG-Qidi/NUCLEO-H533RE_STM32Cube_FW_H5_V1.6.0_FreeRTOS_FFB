@@ -59,7 +59,10 @@ class SPIClass {
     inline uint16_t transfer16(uint16_t data) {
         uint8_t tx[2] = {uint8_t(data >> 8), uint8_t(data & 0xFF)};
         uint8_t rx[2] = {0, 0};
+        HAL_NVIC_DisableIRQ(USB_DRD_FS_IRQn);
+        HAL_SPIEx_FlushRxFifo(hspi);
         HAL_SPI_TransmitReceive(hspi, tx, rx, 2, HAL_MAX_DELAY);
+        HAL_NVIC_EnableIRQ(USB_DRD_FS_IRQn);
         return (uint16_t(rx[0]) << 8) | rx[1];
     }
     inline static void transfer(void *buf, size_t count) {}
